@@ -12,6 +12,7 @@ struct ContentView: View {
         TabView {
             NavigationView {
                 FeedView(posts: PostArrayObject())
+            }
                     .tabItem {
                         Image(systemName: "book.fill")
                         Text("Feed")
@@ -33,8 +34,6 @@ struct ContentView: View {
                     }
                 
             }
-            
-        }
         .tint(Color.MyTheme.purpleColor)
     }
 }
