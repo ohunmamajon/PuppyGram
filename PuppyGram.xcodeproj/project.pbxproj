@@ -18,6 +18,8 @@
 		CCB31B072A7C7BC7005080A0 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31B062A7C7BC7005080A0 /* PostModel.swift */; };
 		CCB31B092A7C7F3D005080A0 /* PostArrayObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31B082A7C7F3D005080A0 /* PostArrayObject.swift */; };
 		CCB31B0D2A7C834B005080A0 /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31B0C2A7C834B005080A0 /* CommentsView.swift */; };
+		CCB31B0F2A7C8634005080A0 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31B0E2A7C8634005080A0 /* MessageView.swift */; };
+		CCB31B112A7C8803005080A0 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31B102A7C8803005080A0 /* CommentModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		CCB31B062A7C7BC7005080A0 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		CCB31B082A7C7F3D005080A0 /* PostArrayObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostArrayObject.swift; sourceTree = "<group>"; };
 		CCB31B0C2A7C834B005080A0 /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
+		CCB31B0E2A7C8634005080A0 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		CCB31B102A7C8803005080A0 /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				CCB31B022A7B42BA005080A0 /* PostView.swift */,
+				CCB31B0E2A7C8634005080A0 /* MessageView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 			children = (
 				CCB31B062A7C7BC7005080A0 /* PostModel.swift */,
 				CCB31B082A7C7F3D005080A0 /* PostArrayObject.swift */,
+				CCB31B102A7C8803005080A0 /* CommentModel.swift */,
 			);
 			path = PostModel;
 			sourceTree = "<group>";
@@ -202,9 +208,11 @@
 				CCB31B012A7B406D005080A0 /* FeedView.swift in Sources */,
 				CCB31B072A7C7BC7005080A0 /* PostModel.swift in Sources */,
 				CCB31AEB2A7B369C005080A0 /* ContentView.swift in Sources */,
+				CCB31B0F2A7C8634005080A0 /* MessageView.swift in Sources */,
 				CCB31AFD2A7B3DCA005080A0 /* Extensions.swift in Sources */,
 				CCB31B092A7C7F3D005080A0 /* PostArrayObject.swift in Sources */,
 				CCB31B032A7B42BA005080A0 /* PostView.swift in Sources */,
+				CCB31B112A7C8803005080A0 /* CommentModel.swift in Sources */,
 				CCB31B0D2A7C834B005080A0 /* CommentsView.swift in Sources */,
 				CCB31AE92A7B369C005080A0 /* PuppyGramApp.swift in Sources */,
 			);
