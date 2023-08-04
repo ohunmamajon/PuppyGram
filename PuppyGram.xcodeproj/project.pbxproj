@@ -17,6 +17,7 @@
 		CCB31B032A7B42BA005080A0 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31B022A7B42BA005080A0 /* PostView.swift */; };
 		CCB31B072A7C7BC7005080A0 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31B062A7C7BC7005080A0 /* PostModel.swift */; };
 		CCB31B092A7C7F3D005080A0 /* PostArrayObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31B082A7C7F3D005080A0 /* PostArrayObject.swift */; };
+		CCB31B0D2A7C834B005080A0 /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31B0C2A7C834B005080A0 /* CommentsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		CCB31B022A7B42BA005080A0 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		CCB31B062A7C7BC7005080A0 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		CCB31B082A7C7F3D005080A0 /* PostArrayObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostArrayObject.swift; sourceTree = "<group>"; };
+		CCB31B0C2A7C834B005080A0 /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				CCB31AE82A7B369C005080A0 /* PuppyGramApp.swift */,
 				CCB31AEA2A7B369C005080A0 /* ContentView.swift */,
 				CCB31B002A7B406D005080A0 /* FeedView.swift */,
+				CCB31B0C2A7C834B005080A0 /* CommentsView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				CCB31AFD2A7B3DCA005080A0 /* Extensions.swift in Sources */,
 				CCB31B092A7C7F3D005080A0 /* PostArrayObject.swift in Sources */,
 				CCB31B032A7B42BA005080A0 /* PostView.swift in Sources */,
+				CCB31B0D2A7C834B005080A0 /* CommentsView.swift in Sources */,
 				CCB31AE92A7B369C005080A0 /* PuppyGramApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
