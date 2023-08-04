@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC2A74AC2A7DBF6B00F0A187 /* ImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2A74AB2A7DBF6B00F0A187 /* ImageGridView.swift */; };
 		CCB31AE92A7B369C005080A0 /* PuppyGramApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31AE82A7B369C005080A0 /* PuppyGramApp.swift */; };
 		CCB31AEB2A7B369C005080A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31AEA2A7B369C005080A0 /* ContentView.swift */; };
 		CCB31AED2A7B369E005080A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCB31AEC2A7B369E005080A0 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CC2A74AB2A7DBF6B00F0A187 /* ImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridView.swift; sourceTree = "<group>"; };
 		CCB31AE52A7B369C005080A0 /* PuppyGram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuppyGram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCB31AE82A7B369C005080A0 /* PuppyGramApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuppyGramApp.swift; sourceTree = "<group>"; };
 		CCB31AEA2A7B369C005080A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				CCB31B022A7B42BA005080A0 /* PostView.swift */,
 				CCB31B0E2A7C8634005080A0 /* MessageView.swift */,
 				CCB31B142A7C90C5005080A0 /* CarouselView.swift */,
+				CC2A74AB2A7DBF6B00F0A187 /* ImageGridView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				CCB31B0F2A7C8634005080A0 /* MessageView.swift in Sources */,
 				CCB31AFD2A7B3DCA005080A0 /* Extensions.swift in Sources */,
 				CCB31B092A7C7F3D005080A0 /* PostArrayObject.swift in Sources */,
+				CC2A74AC2A7DBF6B00F0A187 /* ImageGridView.swift in Sources */,
 				CCB31B032A7B42BA005080A0 /* PostView.swift in Sources */,
 				CCB31B132A7C8FFE005080A0 /* BrowseView.swift in Sources */,
 				CCB31B112A7C8803005080A0 /* CommentModel.swift in Sources */,

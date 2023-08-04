@@ -17,4 +17,10 @@ class PostArrayObject: ObservableObject {
         
         dataArray.append(contentsOf: [post1, post2, post3, post4])
     }
+    
+    /// used for post selection
+    init(post: PostModel) {
+        self.dataArray.append(post)
+    }
+    
 }
