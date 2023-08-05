@@ -38,6 +38,8 @@ struct CarouselView: View {
     
     private func addTimer() {
         
+        selection = 0
+        
         timerAdded = true
         
         let timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { (timer) in
