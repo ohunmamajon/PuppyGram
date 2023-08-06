@@ -7,18 +7,17 @@
 
 import Foundation
 import SwiftUI
-import PhotosUI
 
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var imageSelected: UIImage
-       
+    var sourceType: UIImagePickerController.SourceType
     @Environment(\.dismiss) var dismiss
        
        public func makeUIViewController(context: Context) -> UIImagePickerController {
            let picker = UIImagePickerController()
-           picker.sourceType = .camera
+           picker.sourceType = sourceType
            picker.delegate = context.coordinator
-           picker.allowsEditing = true
+           picker.allowsEditing = false
            return picker
        }
     
@@ -38,10 +37,10 @@ struct ImagePicker: UIViewControllerRepresentable {
         
         func imagePickerController(_ picker: UIImagePickerController,
                                    didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any], _ dismiss: DismissAction) {
-            if let image = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
+            if let image =  info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 parent.imageSelected = image
-                dismiss()
             }
+            dismiss()
         }
     }
 }

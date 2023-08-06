@@ -14,8 +14,8 @@ struct UploadView: View {
     @State private var showImagePicker: Bool = false
     @State private var showPhotosUIPicker: Bool = false
     @State private var photoItem: PhotosPickerItem?
-    @State private var selectedPhotoData: Data?
-    @State private var selectedImage: UIImage = UIImage(named: "logo")!
+    @State private var imageSelected = UIImage()
+    @State private var showPostImageView: Bool = false
     
     var body: some View {
         ZStack {
@@ -45,14 +45,17 @@ struct UploadView: View {
                 .onChange(of: photoItem) { newItem in
                     Task {
                         if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                            selectedPhotoData = data
+                            imageSelected = UIImage(data: data)!
+                            segueToPostImageView()
                         }
                     }
                 }
             }
-            .sheet(isPresented: $showImagePicker) {
-                ImagePicker(imageSelected: $selectedImage)
+            .sheet(isPresented: $showImagePicker, onDismiss: segueToPostImageView) {
+                ImagePicker(imageSelected: $imageSelected, sourceType: .camera)
             }
+               
+            
             
             
             Image("logo.transparent")
@@ -60,12 +63,23 @@ struct UploadView: View {
                 .scaledToFit()
                 .frame(width: 100, height: 100, alignment: .center)
                 .shadow(radius: 15)
+                .fullScreenCover(isPresented: $showPostImageView) {
+                    PostImageView(imageSelected: $imageSelected)
+                }
         }
         .edgesIgnoringSafeArea(.all)
+    }
+    
+    private func segueToPostImageView(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            showPostImageView.toggle()
+        }
     }
 }
 
 struct UploadView_Previews: PreviewProvider {
+    
+    
     static var previews: some View {
         UploadView()
     }
