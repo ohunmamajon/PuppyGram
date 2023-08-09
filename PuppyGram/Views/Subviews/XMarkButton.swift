@@ -2,10 +2,8 @@
 //  XMarkButton.swift
 //  PuppyGram
 //
-//  Created by Okhunjon Mamajonov on 2023/08/06.
+//  Created by Okhunjon Mamajonov on 2023/08/09.
 //
-
-import SwiftUI
 
 import SwiftUI
  struct XMarkButton: View {

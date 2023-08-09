@@ -10,7 +10,8 @@
 		CC2A74AC2A7DBF6B00F0A187 /* ImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2A74AB2A7DBF6B00F0A187 /* ImageGridView.swift */; };
 		CC2A74AE2A7DC7EC00F0A187 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2A74AD2A7DC7EC00F0A187 /* UploadView.swift */; };
 		CC2A74B02A7DD74500F0A187 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2A74AF2A7DD74500F0A187 /* ImagePicker.swift */; };
-		CC90C87E2A7F544600976FF5 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90C87D2A7F544600976FF5 /* XMarkButton.swift */; };
+		CC33D2D22A8075B900826437 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC33D2D12A8075B900826437 /* ProfileView.swift */; };
+		CC33D2D42A8077E900826437 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC33D2D32A8077E900826437 /* ProfileHeaderView.swift */; };
 		CC90C8802A7F54AA00976FF5 /* PostImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90C87F2A7F54AA00976FF5 /* PostImageView.swift */; };
 		CCB31AE92A7B369C005080A0 /* PuppyGramApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31AE82A7B369C005080A0 /* PuppyGramApp.swift */; };
 		CCB31AEB2A7B369C005080A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31AEA2A7B369C005080A0 /* ContentView.swift */; };
@@ -27,13 +28,15 @@
 		CCB31B112A7C8803005080A0 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31B102A7C8803005080A0 /* CommentModel.swift */; };
 		CCB31B132A7C8FFE005080A0 /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31B122A7C8FFE005080A0 /* BrowseView.swift */; };
 		CCB31B152A7C90C5005080A0 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB31B142A7C90C5005080A0 /* CarouselView.swift */; };
+		CCD6C6D12A830D350035DBBB /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD6C6D02A830D350035DBBB /* XMarkButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CC2A74AB2A7DBF6B00F0A187 /* ImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridView.swift; sourceTree = "<group>"; };
 		CC2A74AD2A7DC7EC00F0A187 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		CC2A74AF2A7DD74500F0A187 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		CC90C87D2A7F544600976FF5 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
+		CC33D2D12A8075B900826437 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		CC33D2D32A8077E900826437 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		CC90C87F2A7F54AA00976FF5 /* PostImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageView.swift; sourceTree = "<group>"; };
 		CCB31AE52A7B369C005080A0 /* PuppyGram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuppyGram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCB31AE82A7B369C005080A0 /* PuppyGramApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuppyGramApp.swift; sourceTree = "<group>"; };
@@ -51,6 +54,7 @@
 		CCB31B102A7C8803005080A0 /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		CCB31B122A7C8FFE005080A0 /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
 		CCB31B142A7C90C5005080A0 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		CCD6C6D02A830D350035DBBB /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,7 @@
 				CCB31AFB2A7B3DA2005080A0 /* Helpers */,
 				CCB31AF82A7B3B47005080A0 /* Views */,
 				CCB31AEC2A7B369E005080A0 /* Assets.xcassets */,
+				CCB31AE82A7B369C005080A0 /* PuppyGramApp.swift */,
 				CCB31AEE2A7B369E005080A0 /* Preview Content */,
 				CCB31AF62A7B3985005080A0 /* LaunchScreen.storyboard */,
 			);
@@ -113,13 +118,13 @@
 		CCB31AF92A7B3B53005080A0 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				CCB31AE82A7B369C005080A0 /* PuppyGramApp.swift */,
 				CCB31AEA2A7B369C005080A0 /* ContentView.swift */,
 				CCB31B002A7B406D005080A0 /* FeedView.swift */,
 				CCB31B0C2A7C834B005080A0 /* CommentsView.swift */,
 				CCB31B122A7C8FFE005080A0 /* BrowseView.swift */,
 				CC2A74AD2A7DC7EC00F0A187 /* UploadView.swift */,
 				CC90C87F2A7F54AA00976FF5 /* PostImageView.swift */,
+				CC33D2D12A8075B900826437 /* ProfileView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -131,6 +136,8 @@
 				CCB31B0E2A7C8634005080A0 /* MessageView.swift */,
 				CCB31B142A7C90C5005080A0 /* CarouselView.swift */,
 				CC2A74AB2A7DBF6B00F0A187 /* ImageGridView.swift */,
+				CC33D2D32A8077E900826437 /* ProfileHeaderView.swift */,
+				CCD6C6D02A830D350035DBBB /* XMarkButton.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -140,7 +147,6 @@
 			children = (
 				CCB31AFC2A7B3DCA005080A0 /* Extensions.swift */,
 				CC2A74AF2A7DD74500F0A187 /* ImagePicker.swift */,
-				CC90C87D2A7F544600976FF5 /* XMarkButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -236,12 +242,14 @@
 				CCB31B032A7B42BA005080A0 /* PostView.swift in Sources */,
 				CCB31B132A7C8FFE005080A0 /* BrowseView.swift in Sources */,
 				CCB31B112A7C8803005080A0 /* CommentModel.swift in Sources */,
+				CC33D2D42A8077E900826437 /* ProfileHeaderView.swift in Sources */,
+				CC33D2D22A8075B900826437 /* ProfileView.swift in Sources */,
 				CCB31B0D2A7C834B005080A0 /* CommentsView.swift in Sources */,
-				CC90C87E2A7F544600976FF5 /* XMarkButton.swift in Sources */,
 				CC2A74AE2A7DC7EC00F0A187 /* UploadView.swift in Sources */,
 				CC2A74B02A7DD74500F0A187 /* ImagePicker.swift in Sources */,
 				CCB31B152A7C90C5005080A0 /* CarouselView.swift in Sources */,
 				CC90C8802A7F54AA00976FF5 /* PostImageView.swift in Sources */,
+				CCD6C6D12A830D350035DBBB /* XMarkButton.swift in Sources */,
 				CCB31AE92A7B369C005080A0 /* PuppyGramApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
