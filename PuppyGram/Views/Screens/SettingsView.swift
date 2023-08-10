@@ -34,8 +34,21 @@ struct SettingsView: View {
                 // MARK: Section 2: Profile
                 
                 GroupBox {
-                    SettingsRowView(leftIcon: "pencil", text: "Display Name", color: Color.MyTheme.purpleColor)
-                    SettingsRowView(leftIcon: "text.quote", text: "Bio", color: Color.MyTheme.purpleColor)
+                    
+                    NavigationLink {
+                       SettingsEditTextView(submissionText: "Current Display Name", title: "Display Name", description: "This Text can be edited", placeholder: "Your display name here...")
+                    } label: {
+                        SettingsRowView(leftIcon: "pencil", text: "Display Name", color: Color.MyTheme.purpleColor)
+                    }
+
+                    NavigationLink {
+                        SettingsEditTextView(submissionText: "Current bio here", title: "Profile Bio", description: "Write a catchy bio!", placeholder: "Your bio here...")
+                    } label: {
+                        SettingsRowView(leftIcon: "text.quote", text: "Bio", color: Color.MyTheme.purpleColor)
+                    }
+
+                    
+                  
                     SettingsRowView(leftIcon: "photo", text: "Profile Picture", color: Color.MyTheme.purpleColor)
                     SettingsRowView(leftIcon: "figure.walk", text: "Sign Out", color: Color.MyTheme.purpleColor)
                 } label: {

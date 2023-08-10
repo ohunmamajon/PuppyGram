@@ -16,7 +16,7 @@ extension Color {
         static var yellowColor: Color {
             return Color("ColorYellow")
         }
-        static var  bageColor: Color {
+        static var  beigeColor: Color {
             return Color("ColorBage")
         }
     }

@@ -32,7 +32,7 @@ struct PostImageView: View {
                     .padding()
                     .frame(height: 60)
                     .frame(maxWidth: .infinity)
-                    .background(Color.MyTheme.bageColor)
+                    .background(Color.MyTheme.beigeColor)
                     .font(.headline)
                     .cornerRadius(12)
                     .padding(.horizontal)
