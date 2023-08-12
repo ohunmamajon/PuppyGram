@@ -12,7 +12,7 @@ struct ProfileView: View {
     @State var profileDisplayName: String
     var profileID: String
     var isMyProfile: Bool
-    
+    @State var showSettings: Bool = false
     var body: some View {
         
         var posts = PostArrayObject()
@@ -26,8 +26,9 @@ struct ProfileView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
+                
                 Button {
-                    
+                    showSettings.toggle()
                 } label: {
                     Image(systemName: "line.horizontal.3")
                 }
@@ -35,6 +36,9 @@ struct ProfileView: View {
                 .opacity(isMyProfile ? 1.0 : 0)
 
             }
+        }
+        .sheet(isPresented: $showSettings) {
+            SettingsView()
         }
     }
 }

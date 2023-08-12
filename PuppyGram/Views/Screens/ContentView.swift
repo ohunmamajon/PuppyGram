@@ -26,6 +26,7 @@ struct ContentView: View {
                     }
                UploadView()
                     .tabItem {
+                        
                         Image(systemName: "square.and.arrow.up.fill")
                         Text("Upload")
                     }
