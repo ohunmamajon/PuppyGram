@@ -38,7 +38,8 @@ struct ProfileView: View {
             }
         }
         .sheet(isPresented: $showSettings) {
-            SettingsView()
+//            SettingsView()
+            OnboardingView2()
         }
     }
 }
