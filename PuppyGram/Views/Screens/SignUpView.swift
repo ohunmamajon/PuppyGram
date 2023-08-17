@@ -19,7 +19,7 @@ struct SignUpView: View {
                 .scaledToFit()
                 .frame(width: 100, height: 100, alignment: .center)
             
-            Text("You are not signed in! 🙁")
+            Text("You are not signed in!")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .lineLimit(1)

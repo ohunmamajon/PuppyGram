@@ -10,6 +10,10 @@ import SwiftUI
 struct PostView: View {
     
     @State var post: PostModel
+    @State var anmateLike: Bool = false
+    
+    @State var addHeartAnimationView : Bool = false
+    
     var showHeaderAndFooter: Bool
     
     var body: some View {
@@ -40,15 +44,34 @@ struct PostView: View {
             }
             
             // MARK: Image
-            Image("dog1")
-                .resizable()
-                .scaledToFit()
+            
+            ZStack{
+                Image("dog1")
+                    .resizable()
+                    .scaledToFit()
+                
+                if addHeartAnimationView { LikeAnimationView(animate: $anmateLike)
+                    
+                }
+            }
             
             // MARK: Footer
             if showHeaderAndFooter {
                 HStack(alignment: .center, spacing: 20) {
-                    Image(systemName: "heart")
-                        .font(.title3)
+                    
+                    Button {
+                        if post.likedByUser {
+                            unlikePost()
+                        } else {
+                            likePost()
+                        }
+                        
+                    } label: {
+                        Image(systemName: post.likedByUser ? "heart.fill" : "heart")
+                            .font(.title3)
+                    }
+                    .tint(post.likedByUser ? .red : .primary)
+
                     
                     // MARK: Comment Icon
                     
@@ -74,6 +97,21 @@ struct PostView: View {
             }
         }
         }
+    
+    //MARK:
+    func likePost(){
+        let upDatedPost = PostModel(postID: post.postID, userID: post.userID, userName: post.userID, caption: post.caption, dateCreated: post.dateCreated, likeCount: post.likeCount + 1, likedByUser: true)
+        self.post = upDatedPost
+        anmateLike = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            anmateLike = false
+        }
+  }
+    func unlikePost(){
+        let upDatedPost = PostModel(postID: post.postID, userID: post.userID, userName: post.userID, caption: post.caption, dateCreated: post.dateCreated, likeCount: post.likeCount - 1, likedByUser: false)
+        self.post = upDatedPost
+    }
 }
 
 struct PostView_Previews: PreviewProvider {
