@@ -11,8 +11,15 @@ struct PostView: View {
     
     @State var post: PostModel
     @State var anmateLike: Bool = false
-    
+    @State var postImage: UIImage = UIImage(named: "dog1")!
     @State var addHeartAnimationView : Bool = false
+    @State var showActionSheet: Bool = false
+    @State var actionSheetType: PostActionSheetOption = .general
+    
+    enum PostActionSheetOption {
+        case general
+        case reporting
+    }
     
     var showHeaderAndFooter: Bool
     
@@ -26,7 +33,7 @@ struct PostView: View {
                     NavigationLink {
                         ProfileView(profileDisplayName: post.userName, profileID: post.userID, isMyProfile: false)
                     } label: {
-                        Image("dog1")
+                        Image(uiImage: postImage)
                             .resizable()
                             .scaledToFill()
                             .frame(width: 30, height: 30, alignment: .center)
@@ -37,8 +44,18 @@ struct PostView: View {
                             .foregroundColor(.primary)
                     }
                     Spacer()
-                    Image(systemName: "ellipsis")
-                        .font(.headline)
+                    
+                    Button {
+                        showActionSheet.toggle()
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .font(.headline)
+                    }
+                    .tint(.primary)
+                    .actionSheet(isPresented: $showActionSheet) {
+                       getActionSheet()
+                    }
+
                 }
                 .padding(.all, 6)
             }
@@ -83,8 +100,13 @@ struct PostView: View {
                             .foregroundColor(.primary)
                     }
 
-                    Image(systemName: "paperplane")
-                        .font(.title3)
+                    Button {
+                        sharePost()
+                    } label: {
+                        Image(systemName: "paperplane")
+                            .font(.title3)
+                    }
+                    .tint(.primary)
                     Spacer()
                 }
                 .padding(.all, 6)
@@ -98,7 +120,7 @@ struct PostView: View {
         }
         }
     
-    //MARK:
+    //MARK: Functions
     func likePost(){
         let upDatedPost = PostModel(postID: post.postID, userID: post.userID, userName: post.userID, caption: post.caption, dateCreated: post.dateCreated, likeCount: post.likeCount + 1, likedByUser: true)
         self.post = upDatedPost
@@ -112,6 +134,57 @@ struct PostView: View {
         let upDatedPost = PostModel(postID: post.postID, userID: post.userID, userName: post.userID, caption: post.caption, dateCreated: post.dateCreated, likeCount: post.likeCount - 1, likedByUser: false)
         self.post = upDatedPost
     }
+    
+    func getActionSheet() -> ActionSheet {
+        
+        switch self.actionSheetType {
+            
+        case .general:
+            return ActionSheet(title: Text("What would you like to do?"), buttons: [
+                .destructive(Text("Report")) {
+                    self.actionSheetType = .reporting
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.showActionSheet.toggle()
+                    }
+                },
+                .default(Text("Learn more...")) {
+                    print("lear more pressed")
+                },
+                
+            ])
+        case .reporting:
+            return ActionSheet(title: Text("Why are you reportingg this post?"), buttons: [
+                .destructive(Text("This is inappropriate")) {
+                    reportPost(reason: "This is inappropriate")
+                },
+                .destructive(Text("This is spam")) {
+                    reportPost(reason: "This is spam")
+                },
+                .destructive(Text("It made me uncomfortable")) {
+                    reportPost(reason: "It made me uncomfortable")
+                },
+                .cancel({self.actionSheetType = .general})
+            ])
+        }
+    }
+    
+    func reportPost(reason: String) {
+        
+    }
+    
+    func sharePost() {
+        
+        let message = "Checkout this post on PuppyGram"
+        let image = postImage
+        let link = URL(string: "https://www.google.com")!
+        
+        let activityController = UIActivityViewController(activityItems: [message, image, link], applicationActivities: nil)
+        
+        let viewController = UIApplication.shared.windows.first?.rootViewController
+        
+        viewController?.present(activityController, animated: true)
+    }
+    
 }
 
 struct PostView_Previews: PreviewProvider {
