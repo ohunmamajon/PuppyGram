@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var currentUserID: String? = "user"
+    var currentUserID: String? = nil
     @Environment(\.colorScheme) var colorScheme
    
     init() {

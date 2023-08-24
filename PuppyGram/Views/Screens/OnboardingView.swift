@@ -11,6 +11,7 @@ struct OnboardingView: View {
     
     @Environment(\.dismiss) var dismiss
     @State var showOnboarding2: Bool = false
+    @State var showErrror: Bool = false
     
     var body: some View {
         VStack(spacing: 10) {
@@ -32,14 +33,18 @@ struct OnboardingView: View {
                 .foregroundColor(Color.MyTheme.purpleColor)
                 .padding()
             
+            //MARK: Sign in with Apple
             Button {
-                showOnboarding2.toggle()
+                
+                SignInWithApple.instance.startSignInWithAppleFlow(view: self)
+//                showOnboarding2.toggle()
             } label: {
                 AppleSignInButton()
                     .frame(height: 60)
                     .frame(maxWidth: .infinity)
             }
 
+            //MARK: Sign in with Google
             Button {
                 showOnboarding2.toggle()
             } label: {
@@ -73,6 +78,9 @@ struct OnboardingView: View {
         .background(Color.MyTheme.beigeColor)
         .fullScreenCover(isPresented: $showOnboarding2) {
             OnboardingView2()
+        }
+        .alert(isPresented: $showErrror) {
+            return Alert(title: Text("Error signing in 😭"))
         }
     }
 }
