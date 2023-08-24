@@ -46,7 +46,8 @@ struct OnboardingView: View {
 
             //MARK: Sign in with Google
             Button {
-                showOnboarding2.toggle()
+                SignInWithGoogle.instance.startSignInWithGoogleFlow(view: self)
+//                showOnboarding2.toggle()
             } label: {
                 HStack {
                     Image(systemName: "globe")
