@@ -11,6 +11,7 @@ struct CommentsView: View {
     
     @State var commentsArray = [CommentModel]()
     @State var submissionText: String = ""
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack{
@@ -36,10 +37,12 @@ struct CommentsView: View {
                     Image(systemName: "paperplane.fill")
                         .font(.title2)
                 }
-                .tint(Color.MyTheme.purpleColor)
+                .tint( colorScheme == .light ? Color.MyTheme.purpleColor : Color.MyTheme.yellowColor)
             }
             .padding(.all, 6)
+            .padding(.bottom)
         }
+        .padding(.horizontal)
         .navigationTitle("Comments")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {

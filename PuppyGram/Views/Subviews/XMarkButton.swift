@@ -9,7 +9,7 @@ import SwiftUI
  struct XMarkButton: View {
     
      var dismiss: DismissAction?
-    
+     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         Button(action: {
             dismiss?()
@@ -17,6 +17,7 @@ import SwiftUI
             Image(systemName: "xmark")
                 .font(.title)
                 .padding()
+                .foregroundColor(colorScheme == .light ? Color.MyTheme.purpleColor : Color.MyTheme.yellowColor)
         })
         .tint(.primary)
 

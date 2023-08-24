@@ -9,10 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var currentUserID: String? = nil
-
+    var currentUserID: String? = "user"
+    @Environment(\.colorScheme) var colorScheme
+   
+    init() {
+        UITabBar.appearance().scrollEdgeAppearance = UITabBarAppearance.init(idiom: .unspecified)
+    }
     
     var body: some View {
+        
+        
         TabView {
             NavigationView {
                 FeedView(posts: PostArrayObject(), title: "Feed")
@@ -49,12 +55,13 @@ struct ContentView: View {
                     }
                 
             }
-        .tint(Color.MyTheme.purpleColor)
+        .tint(colorScheme == .light ? Color.MyTheme.purpleColor : Color.MyTheme.yellowColor)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.dark)
     }
 }

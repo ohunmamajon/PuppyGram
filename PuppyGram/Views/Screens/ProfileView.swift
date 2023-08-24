@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    @Environment(\.colorScheme) var colorScheme
     @State var profileDisplayName: String
+    @State var showSettings: Bool = false
     var profileID: String
     var isMyProfile: Bool
-    @State var showSettings: Bool = false
     var body: some View {
         
         var posts = PostArrayObject()
@@ -32,14 +33,14 @@ struct ProfileView: View {
                 } label: {
                     Image(systemName: "line.horizontal.3")
                 }
-                .tint(Color.MyTheme.purpleColor)
+                .tint(colorScheme == .light ? Color.MyTheme.purpleColor : Color.MyTheme.yellowColor)
                 .opacity(isMyProfile ? 1.0 : 0)
 
             }
         }
         .sheet(isPresented: $showSettings) {
-//            SettingsView()
-            OnboardingView2()
+            SettingsView()
+                .preferredColorScheme(colorScheme)
         }
     }
 }

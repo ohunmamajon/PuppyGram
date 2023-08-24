@@ -16,6 +16,7 @@ struct UploadView: View {
     @State private var photoItem: PhotosPickerItem?
     @State private var imageSelected = UIImage()
     @State private var showPostImageView: Bool = false
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack {
@@ -35,8 +36,10 @@ struct UploadView: View {
                
              PhotosPicker(selection: $photoItem,
                           matching: .images) {
+                 
                  Label("Select photo".uppercased(), systemImage: "photo")
                     }
+                
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .font(.largeTitle)
                 .fontWeight(.bold)
@@ -65,6 +68,7 @@ struct UploadView: View {
                 .shadow(radius: 15)
                 .fullScreenCover(isPresented: $showPostImageView) {
                     PostImageView(imageSelected: $imageSelected)
+                        .preferredColorScheme(colorScheme)
                 }
         }
         .edgesIgnoringSafeArea(.all)
@@ -82,5 +86,6 @@ struct UploadView_Previews: PreviewProvider {
     
     static var previews: some View {
         UploadView()
+            
     }
 }

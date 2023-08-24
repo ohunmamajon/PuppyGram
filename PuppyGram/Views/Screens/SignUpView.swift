@@ -30,7 +30,7 @@ struct SignUpView: View {
                 .font(.headline)
                 .fontWeight(.medium)
                 .multilineTextAlignment(.center)
-            
+                .foregroundColor(Color.MyTheme.purpleColor)
             Button {
                 showOnboarding.toggle()
             } label: {
