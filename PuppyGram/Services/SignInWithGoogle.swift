@@ -32,7 +32,7 @@ class SignInWithGoogle: NSObject {
         GIDSignIn.sharedInstance.signIn(withPresenting: prVC ) { [unowned self] result, error in
           guard error == nil else {
             // ...
-              self.onboardingView.showErrror.toggle()
+              self.onboardingView.showError.toggle()
               return
           }
 
@@ -40,7 +40,7 @@ class SignInWithGoogle: NSObject {
             let idToken = user.idToken?.tokenString
           else {
             // ...
-              self.onboardingView.showErrror.toggle()
+              self.onboardingView.showError.toggle()
               return
           }
 
@@ -49,6 +49,8 @@ class SignInWithGoogle: NSObject {
             
             let fullName = user.profile?.name
             let email = user.profile?.email
+            
+            self.onboardingView.connectToFirebase(name: fullName ?? "", email: email ?? "", provider: "google", crediantial: credential)
 
           // ...
             return

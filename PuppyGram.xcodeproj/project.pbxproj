@@ -20,6 +20,9 @@
 		CC2B79D02A9707F800E7AF7C /* SignInWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2B79CF2A9707F800E7AF7C /* SignInWithGoogle.swift */; };
 		CC2B79D32A97088800E7AF7C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = CC2B79D22A97088800E7AF7C /* GoogleSignIn */; };
 		CC2B79D52A97088800E7AF7C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CC2B79D42A97088800E7AF7C /* GoogleSignInSwift */; };
+		CC2B79DB2A98530E00E7AF7C /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2B79DA2A98530E00E7AF7C /* AuthService.swift */; };
+		CC2B79DD2A9863D600E7AF7C /* Enums & Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2B79DC2A9863D600E7AF7C /* Enums & Structs.swift */; };
+		CC2B79E02A986A2B00E7AF7C /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2B79DF2A986A2B00E7AF7C /* ImageManager.swift */; };
 		CC33D2D22A8075B900826437 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC33D2D12A8075B900826437 /* ProfileView.swift */; };
 		CC33D2D42A8077E900826437 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC33D2D32A8077E900826437 /* ProfileHeaderView.swift */; };
 		CC35220B2A848D160008FA94 /* SettingsEditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35220A2A848D160008FA94 /* SettingsEditTextView.swift */; };
@@ -60,6 +63,9 @@
 		CC2B79CC2A96FD2F00E7AF7C /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
 		CC2B79CF2A9707F800E7AF7C /* SignInWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogle.swift; sourceTree = "<group>"; };
 		CC2B79D62A9708E500E7AF7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CC2B79DA2A98530E00E7AF7C /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		CC2B79DC2A9863D600E7AF7C /* Enums & Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enums & Structs.swift"; sourceTree = "<group>"; };
+		CC2B79DF2A986A2B00E7AF7C /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		CC33D2D12A8075B900826437 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CC33D2D32A8077E900826437 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		CC35220A2A848D160008FA94 /* SettingsEditTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEditTextView.swift; sourceTree = "<group>"; };
@@ -113,6 +119,7 @@
 		CC2B79CB2A96FCFB00E7AF7C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CC2B79D72A9852BE00E7AF7C /* Firebase */,
 				CC2B79CE2A96FD3700E7AF7C /* SignInProviders */,
 			);
 			path = Services;
@@ -125,6 +132,22 @@
 				CC2B79CF2A9707F800E7AF7C /* SignInWithGoogle.swift */,
 			);
 			name = SignInProviders;
+			sourceTree = "<group>";
+		};
+		CC2B79D72A9852BE00E7AF7C /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				CC2B79DA2A98530E00E7AF7C /* AuthService.swift */,
+			);
+			name = Firebase;
+			sourceTree = "<group>";
+		};
+		CC2B79DE2A986A1600E7AF7C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				CC2B79DF2A986A2B00E7AF7C /* ImageManager.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		CCB31ADC2A7B369C005080A0 = {
@@ -146,6 +169,7 @@
 		CCB31AE72A7B369C005080A0 /* PuppyGram */ = {
 			isa = PBXGroup;
 			children = (
+				CC2B79DE2A986A1600E7AF7C /* Utilities */,
 				CC2B79D62A9708E500E7AF7C /* Info.plist */,
 				CC2B79CB2A96FCFB00E7AF7C /* Services */,
 				CC2B79CA2A96FC1100E7AF7C /* PuppyGram.entitlements */,
@@ -220,6 +244,7 @@
 			children = (
 				CCB31AFC2A7B3DCA005080A0 /* Extensions.swift */,
 				CC2A74AF2A7DD74500F0A187 /* ImagePicker.swift */,
+				CC2B79DC2A9863D600E7AF7C /* Enums & Structs.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -320,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCE65AA42A8719CA00448AD0 /* AppleSignInButton.swift in Sources */,
+				CC2B79E02A986A2B00E7AF7C /* ImageManager.swift in Sources */,
 				CCB31B012A7B406D005080A0 /* FeedView.swift in Sources */,
 				CCB31B072A7C7BC7005080A0 /* PostModel.swift in Sources */,
 				CC54516C2A85CB0000AEFC1B /* SettingsEditImageView..swift in Sources */,
@@ -330,10 +356,12 @@
 				CCB31AFD2A7B3DCA005080A0 /* Extensions.swift in Sources */,
 				CCD6C6D32A83123E0035DBBB /* SettingsView.swift in Sources */,
 				CC2B79CD2A96FD2F00E7AF7C /* SignInWithApple.swift in Sources */,
+				CC2B79DD2A9863D600E7AF7C /* Enums & Structs.swift in Sources */,
 				CCB31B092A7C7F3D005080A0 /* PostArrayObject.swift in Sources */,
 				CC2A74AC2A7DBF6B00F0A187 /* ImageGridView.swift in Sources */,
 				CCB31B032A7B42BA005080A0 /* PostView.swift in Sources */,
 				CCB31B132A7C8FFE005080A0 /* BrowseView.swift in Sources */,
+				CC2B79DB2A98530E00E7AF7C /* AuthService.swift in Sources */,
 				CCB31B112A7C8803005080A0 /* CommentModel.swift in Sources */,
 				CC33D2D42A8077E900826437 /* ProfileHeaderView.swift in Sources */,
 				CCE65AA62A871EA200448AD0 /* OnboardingView2.swift in Sources */,

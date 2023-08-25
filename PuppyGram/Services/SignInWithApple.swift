@@ -95,13 +95,13 @@ class SignInWithApple: NSObject, ASAuthorizationControllerDelegate {
             let credential = OAuthProvider.appleCredential(withIDToken: idTokenString,
                                                            rawNonce: nonce,
                                                            fullName: appleIDCredential.fullName)
-            print("Sign in with emai: \(email) and with name: \(name) ")
+            self.onboardingView.connectToFirebase(name: name, email: email, provider: "apple", crediantial: credential)
         }
     }
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
        // Handle error.
        print("Sign in with Apple errored: \(error)")
-        self.onboardingView.showErrror.toggle()
+        self.onboardingView.showError.toggle()
      }
 
 }

@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    var currentUserID: String? = nil
+
     @Environment(\.colorScheme) var colorScheme
    
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
+
+    
     init() {
         UITabBar.appearance().scrollEdgeAppearance = UITabBarAppearance.init(idiom: .unspecified)
     }

@@ -9,9 +9,15 @@ import SwiftUI
 import PhotosUI
 struct OnboardingView2: View {
     
-    @State var displayName: String = ""
+    @Environment(\.dismiss) var dismiss
+    
+    @Binding var displayName: String
+    @Binding var email: String
+    @Binding var providerID: String
+    @Binding var provider: String
     @State var photoItem: PhotosPickerItem?
     @State var selectedImage = UIImage()
+    @State var showError: Bool = false
     var body: some View {
         VStack(spacing: 20) {
             
@@ -57,17 +63,38 @@ struct OnboardingView2: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.MyTheme.purpleColor)
+        .alert(isPresented: $showError) {
+            return Alert(title: Text("Error creating a profile 😭"))
+        }
+
     
     }
     
     // MARK: Functions
     func createProfile(){
-        
+        AuthService.instance.createNewUserInFirebse(name: displayName, email: email, providerId: providerID, provider: provider, profileImage: selectedImage) { returnedUserID in
+            if let userID = returnedUserID {
+                AuthService.instance.logInUserToApp(userID: userID) { success in
+                    if success {
+                        
+                    } else {
+                        print("Error logging in")
+                        self.showError.toggle()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { self.dismiss() }
+                    }
+                }
+            } else {
+                print("Error creating a new user")
+                self.showError.toggle()
+            }
+        }
     }
 }
 
 struct OnboardingView2_Previews: PreviewProvider {
+    
+    @State static var test: String = "Test"
     static var previews: some View {
-        OnboardingView2()
+        OnboardingView2(displayName: $test, email: $test, providerID: $test, provider: $test)
     }
 }
