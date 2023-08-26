@@ -20,20 +20,28 @@ class AuthService {
     private var ref = db.collection("users")
     
     //MARK: AUTH USER FUNCTIONS
-    func logInUserToFirebase(credential: AuthCredential, handler: @escaping(_ providerID: String?, _ isError: Bool) -> ()) {
+    func logInUserToFirebase(credential: AuthCredential, handler: @escaping(_ providerID: String?, _ isError: Bool, _ isNewUser: Bool?, _ userID: String? ) -> ()) {
         Auth.auth().signIn(with: credential) { (result, error) in
             if error != nil {
                 print("Error logging in to Firebase")
-                handler(nil, true)
+                handler(nil, true, nil, nil)
             }
             
             guard let  providerID = result?.user.uid else {
                 print("error getting provider ID")
-                handler(nil, true)
+                handler(nil, true, nil, nil)
                 return
             }
             
-            handler(providerID, false)
+            self.checkIFUserExists(providerID: providerID) { returnedUserID in
+                if let userID = returnedUserID {
+                    handler(providerID, false, false, userID)
+                } else {
+                    handler(providerID, false, true, nil)
+                }
+            }
+            
+//            handler(providerID, false)
         }
     }
     
@@ -54,6 +62,24 @@ class AuthService {
             }
         }
     }
+    
+    func logOutUser(handler: @escaping(_ success: Bool) -> ()) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("error\(error)")
+            handler(false)
+        }
+        handler(true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            let defaultsDictionary = UserDefaults.standard.dictionaryRepresentation()
+            defaultsDictionary.keys.forEach { key in
+                UserDefaults.standard.removeObject(forKey: key)
+            }
+        }
+    }
+    
     
     func createNewUserInFirebse(name: String, email: String, providerId: String, provider: String, profileImage: UIImage, handler: @escaping(_ userID: String?) -> ()) {
         let document = ref.document()
@@ -83,6 +109,21 @@ class AuthService {
         
         
     }
+    
+    private func checkIFUserExists(providerID: String, handler: @escaping(_ userID: String?)->()){
+        ref.whereField(DatabaseUserField.providerID, isEqualTo: providerID).getDocuments { (querySnapshot, error) in
+            if let snapShot = querySnapshot, snapShot.count > 0, let document = snapShot.documents.first {
+                let existingUserID = document.documentID
+                handler(existingUserID)
+                return
+            } else {
+                handler(nil)
+                return
+            }
+        }
+        
+    }
+    
     
     func getUserInfo(forUserID userID: String, handler: @escaping(_ name: String?, _ bio: String?) ->() ) {
         ref.document(userID).getDocument { (documentSnapshot, error) in

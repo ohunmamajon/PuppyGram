@@ -24,7 +24,7 @@ struct OnboardingView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100, height: 100, alignment: .center)
-            .shadow(radius: 12)
+                .shadow(radius: 12)
             
             Text("Welcome to PuppyGram")
                 .font(.largeTitle)
@@ -42,17 +42,17 @@ struct OnboardingView: View {
             Button {
                 
                 SignInWithApple.instance.startSignInWithAppleFlow(view: self)
-//                showOnboarding2.toggle()
+                //                showOnboarding2.toggle()
             } label: {
                 AppleSignInButton()
                     .frame(height: 60)
                     .frame(maxWidth: .infinity)
             }
-
+            
             //MARK: Sign in with Google
             Button {
                 SignInWithGoogle.instance.startSignInWithGoogleFlow(view: self)
-//                showOnboarding2.toggle()
+                //                showOnboarding2.toggle()
             } label: {
                 HStack {
                     Image(systemName: "globe")
@@ -76,7 +76,7 @@ struct OnboardingView: View {
                     .padding()
             }
             .tint(.black)
-
+            
         }
         .padding(.all, 20)
         .edgesIgnoringSafeArea(.all)
@@ -93,18 +93,45 @@ struct OnboardingView: View {
     }
     
     func connectToFirebase(name: String, email: String, provider: String, crediantial: AuthCredential){
-        AuthService.instance.logInUserToFirebase(credential: crediantial) { returnedProviderID, isError in
-            if let providerID = returnedProviderID, !isError {
-                self.displayName = name
-                self.email = email
-                self.provider = provider
-                self.providerID = providerID
-                self.showOnboarding2.toggle()
-    
+        AuthService.instance.logInUserToFirebase(credential: crediantial) { returnedProviderID, isError, isNewUser, returnedUserID in
+            
+            if let newUser = isNewUser {
+                if newUser{
+                    if let providerID = returnedProviderID, !isError {
+                        self.displayName = name
+                        self.email = email
+                        self.provider = provider
+                        self.providerID = providerID
+                        self.showOnboarding2.toggle()
+                        
+                    } else {
+                        print("Error getting providerID from log in user to Firebase")
+                        self.showError.toggle()
+                    }
+                    
+                } else {
+                    
+                    if let userID = returnedUserID {
+                        AuthService.instance.logInUserToApp(userID: userID) { success in
+                            if success {
+                                self.dismiss()
+                            } else {
+                                print("Error logging in existing user into App")
+                                self.showError.toggle()
+                            }
+                        }
+                    } else {
+                        print("Error getting userID from existing users  in Firebase")
+                        self.showError.toggle()
+                    }
+                    
+                }
+                
             } else {
-                print("Error getting from log in user to Firebase")
-                      self.showError.toggle()
+                print("Error getting info from log in user to Firebase")
+                self.showError.toggle()
             }
+            
         }
     }
     

@@ -22,7 +22,7 @@ struct ProfileHeaderView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
-            Text("User added biio iuhiguig kgfigg kjgigig igigi iugiugi uigigigbi iugigb")
+            Text("User added bio here...")
                 .font(.body)
                 .fontWeight(.regular)
                 .multilineTextAlignment(.center)
