@@ -22,11 +22,26 @@ class ImageManager{
         uploadImage(path: path, image: image) { _ in }
     }
     
+    func uploadPostImage(postID: String, image: UIImage, handler: @escaping(_ success: Bool) -> ()) {
+        let path = getPostImagePath(postID: postID)
+        uploadImage(path: path, image: image) { success in
+            handler(success)
+        }
+    }
+    
     private func getProfileImagePath(userID: String) -> StorageReference {
         let userPath = "users/\(userID)/profile"
         let storagePath = ref.reference(withPath: userPath)
         return storagePath
     }
+    
+    private func getPostImagePath(postID: String) -> StorageReference {
+        let postPath = "posts/\(postID)/1"
+        let storagePath = ref.reference(withPath: postPath)
+        return storagePath
+    }
+    
+    
     
     private func uploadImage(path: StorageReference, image: UIImage, handler: @escaping(_ success: Bool) -> ()){
         

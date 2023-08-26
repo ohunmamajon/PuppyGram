@@ -8,6 +8,7 @@
 import Foundation
 
 struct DatabaseUserField{
+    
     static let displayName = "display_name"
     static let email = "email"
     static let providerID = "provider_id"
@@ -15,10 +16,24 @@ struct DatabaseUserField{
     static let userID =   "user_id"
     static let bio =  "bio"
     static let dateCreated =  "date_created"
+    
 }
 
+struct DatabasePostField{
+    
+    static let postID =   "post_id"
+    static let caption =  "caption"
+    static let userID =   "user_id"
+    static let displayName = "display_name"
+    static let dateCreated =  "date_created"
+    
+}
+
+
 struct CurrentUserDefaults {
+    
     static let displayName = "display_name"
     static let userID =   "user_id"
     static let bio =  "bio"
+    
 }

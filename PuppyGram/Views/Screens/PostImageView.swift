@@ -15,6 +15,12 @@ struct PostImageView: View {
     @State var captionText: String = ""
     @Binding var imageSelected: UIImage
     
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID : String?
+    @AppStorage(CurrentUserDefaults.displayName) var displayName: String?
+    
+    @State var showAlert: Bool = false
+    @State var uploadedSuccessfully: Bool = false
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             HStack {
@@ -42,7 +48,7 @@ struct PostImageView: View {
                     .textInputAutocapitalization(.sentences)
                 
                 Button {
-                    
+                    postPicture()
                 } label: {
                     Text("Post Picture!".uppercased())
                         .font(.title3)
@@ -57,13 +63,34 @@ struct PostImageView: View {
                 .tint(colorScheme == .light ? Color.MyTheme.yellowColor : Color.MyTheme.purpleColor)
 
             }
+            .alert(isPresented: $showAlert) {
+                getAlert()
+            }
         }
     }
     
 // MARK: Functions
     
     func postPicture(){
-        print("database")
+        
+        guard let userID = currentUserID, let displayName = displayName  else {
+            print("Error getting user defaults")
+            return }
+        
+        DataService.instance.uploadPost(image: imageSelected, caption: captionText, displayName: displayName, userID: userID) { success in
+            self.uploadedSuccessfully = success
+            self.showAlert.toggle()
+        }
+    }
+    
+    func getAlert() -> Alert {
+        if uploadedSuccessfully {
+            return Alert(title: Text("Successfully uploaded 🥳"), dismissButton: .default(Text("Ok"), action: {
+                self.dismiss()
+            }))
+        } else {
+            return Alert(title: Text("Error uploading... 😭"))
+        }
     }
     
 }
