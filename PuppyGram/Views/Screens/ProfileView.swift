@@ -12,6 +12,7 @@ struct ProfileView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var profileDisplayName: String
     @State var showSettings: Bool = false
+    @State var profileImage : UIImage = UIImage(named:"logo.loading")!
     var profileID: String
     var isMyProfile: Bool
     var body: some View {
@@ -19,7 +20,7 @@ struct ProfileView: View {
         var posts = PostArrayObject()
         
         ScrollView(.vertical, showsIndicators: false) {
-            ProfileHeaderView(profileDisplayName: $profileDisplayName)
+            ProfileHeaderView(profileDisplayName: $profileDisplayName, profileImage: $profileImage)
             Divider()
             ImageGridView(posts: posts)
         }
@@ -38,9 +39,21 @@ struct ProfileView: View {
 
             }
         }
+        .onAppear{
+            getProfileImage()
+        }
         .sheet(isPresented: $showSettings) {
             SettingsView()
                 .preferredColorScheme(colorScheme)
+        }
+    }
+    
+    //MARK: FUNCTIONS
+    func getProfileImage(){
+        ImageManager.instance.downloadProfileImage(userID: profileID) { returnedImage in
+            if let image = returnedImage {
+                self.profileImage = image
+            }
         }
     }
 }

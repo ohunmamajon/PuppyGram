@@ -9,6 +9,8 @@ import Foundation
 import FirebaseStorage
 import SwiftUI
 
+let imageCache = NSCache<AnyObject, UIImage>()
+
 class ImageManager{
     
     static let instance = ImageManager()
@@ -39,6 +41,15 @@ class ImageManager{
         let postPath = "posts/\(postID)/1"
         let storagePath = ref.reference(withPath: postPath)
         return storagePath
+    }
+    
+    func downloadProfileImage(userID: String, handler: @escaping(_ image: UIImage?) -> ()){
+        let path = getProfileImagePath(userID: userID)
+        
+        downloadImage(path: path) { returnedImage in
+            handler(returnedImage)
+        }
+        
     }
     
     
@@ -84,4 +95,25 @@ class ImageManager{
             }
         }
     }
+    
+    private func downloadImage(path: StorageReference, handler: @escaping(_ image: UIImage?) -> ()) {
+        
+        
+        if let cachedImage = imageCache.object(forKey: path) {
+            handler(cachedImage)
+            return
+        } else {
+            path.getData(maxSize: 27 * 1024 * 1024) { returnedImageData, error in
+                if let data = returnedImageData, let image = UIImage(data: data) {
+                    imageCache.setObject(image, forKey: path)
+                handler(image)
+                    return
+                } else {
+                    handler(nil)
+                    return
+                }
+            }
+        }
+        }
+    
 }

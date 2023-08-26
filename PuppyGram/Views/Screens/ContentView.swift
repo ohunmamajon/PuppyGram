@@ -12,7 +12,7 @@ struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
    
     @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
-
+    @AppStorage(CurrentUserDefaults.displayName) var displayName: String?
     
     init() {
         UITabBar.appearance().scrollEdgeAppearance = UITabBarAppearance.init(idiom: .unspecified)
@@ -43,9 +43,9 @@ struct ContentView: View {
                         Text("Upload")
                     }
             ZStack{
-                if currentUserID != nil {
+                if let userID = currentUserID , let name = displayName {
                     NavigationView {
-                        ProfileView(profileDisplayName: "My profile", profileID: "", isMyProfile: true)
+                        ProfileView(profileDisplayName: name, profileID: userID, isMyProfile: true)
                     }
                 } else {
                     SignUpView()
