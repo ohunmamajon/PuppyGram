@@ -15,9 +15,10 @@ struct ProfileView: View {
     @State var profileImage : UIImage = UIImage(named:"logo.loading")!
     var profileID: String
     var isMyProfile: Bool
+    var posts : PostArrayObject
     var body: some View {
         
-        var posts = PostArrayObject()
+        
         
         ScrollView(.vertical, showsIndicators: false) {
             ProfileHeaderView(profileDisplayName: $profileDisplayName, profileImage: $profileImage)
@@ -61,7 +62,7 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ProfileView(profileDisplayName: "Joe", profileID: "", isMyProfile: true)
+            ProfileView(profileDisplayName: "Joe", profileID: "", isMyProfile: true, posts: PostArrayObject(userID: ""))
         }
     }
 }

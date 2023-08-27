@@ -18,19 +18,22 @@ struct ContentView: View {
         UITabBar.appearance().scrollEdgeAppearance = UITabBarAppearance.init(idiom: .unspecified)
     }
     
+    let feedPosts = PostArrayObject(shuffled: false)
+    let browsePosts = PostArrayObject(shuffled: true)
+    
     var body: some View {
         
         
         TabView {
             NavigationView {
-                FeedView(posts: PostArrayObject(), title: "Feed")
+                FeedView(posts: feedPosts, title: "Feed")
             }
                     .tabItem {
                         Image(systemName: "book.fill")
                         Text("Feed")
                     }
             NavigationView {
-            BrowseView()
+                BrowseView(posts: browsePosts)
             }
                     .tabItem {
                         Image(systemName: "magnifyingglass")
@@ -45,7 +48,7 @@ struct ContentView: View {
             ZStack{
                 if let userID = currentUserID , let name = displayName {
                     NavigationView {
-                        ProfileView(profileDisplayName: name, profileID: userID, isMyProfile: true)
+                        ProfileView(profileDisplayName: name, profileID: userID, isMyProfile: true, posts: PostArrayObject(userID: userID))
                     }
                 } else {
                     SignUpView()

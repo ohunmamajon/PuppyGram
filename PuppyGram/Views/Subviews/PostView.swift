@@ -11,10 +11,11 @@ struct PostView: View {
     
     @State var post: PostModel
     @State var anmateLike: Bool = false
-    @State var postImage: UIImage = UIImage(named: "dog1")!
     @State var addHeartAnimationView : Bool = false
     @State var showActionSheet: Bool = false
     @State var actionSheetType: PostActionSheetOption = .general
+    @State var profileImage: UIImage = UIImage(named: "logo.loading")!
+    @State var postImage: UIImage = UIImage(named: "logo.loading")!
     
     enum PostActionSheetOption {
         case general
@@ -31,9 +32,9 @@ struct PostView: View {
                 HStack{
                     
                     NavigationLink {
-                        ProfileView(profileDisplayName: post.userName, profileID: post.userID, isMyProfile: false)
+                        ProfileView(profileDisplayName: post.userName, profileID: post.userID, isMyProfile: false, posts: PostArrayObject(userID: post.userID))
                     } label: {
-                        Image(uiImage: postImage)
+                        Image(uiImage: profileImage)
                             .resizable()
                             .scaledToFill()
                             .frame(width: 30, height: 30, alignment: .center)
@@ -63,9 +64,10 @@ struct PostView: View {
             // MARK: Image
             
             ZStack{
-                Image("dog1")
+                Image(uiImage: postImage)
                     .resizable()
                     .scaledToFit()
+                
                 
                 if addHeartAnimationView { LikeAnimationView(animate: $anmateLike)
                     
@@ -112,15 +114,33 @@ struct PostView: View {
                 .padding(.all, 6)
              
                 HStack {
-                    Text(post.caption)
+                    Text(post.caption ?? "")
                     Spacer(minLength: 0)
                 }
                 .padding(.all, 6)
             }
         }
+        .onAppear{
+            getImages()
+        }
         }
     
     //MARK: Functions
+    
+    func getImages(){
+        ImageManager.instance.downloadProfileImage(userID: post.userID) { returnedImage in
+            if let image = returnedImage {
+                self.profileImage = image
+            }
+        }
+        
+        ImageManager.instance.downloadPostImage(postID: post.postID) { returnedImage in
+            if let image = returnedImage {
+                self.postImage = image
+            }
+        }
+    }
+    
     func likePost(){
         let upDatedPost = PostModel(postID: post.postID, userID: post.userID, userName: post.userID, caption: post.caption, dateCreated: post.dateCreated, likeCount: post.likeCount + 1, likedByUser: true)
         self.post = upDatedPost

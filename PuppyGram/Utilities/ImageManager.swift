@@ -52,6 +52,13 @@ class ImageManager{
         
     }
     
+    func downloadPostImage(postID: String, handler: @escaping(_ image: UIImage?) -> ()) {
+        let path = getPostImagePath(postID: postID)
+        downloadImage(path: path) { returnedImage in
+            handler(returnedImage)
+        }
+    }
+    
     
     
     private func uploadImage(path: StorageReference, image: UIImage, handler: @escaping(_ success: Bool) -> ()){
@@ -101,12 +108,14 @@ class ImageManager{
         
         if let cachedImage = imageCache.object(forKey: path) {
             handler(cachedImage)
+            print("getting image from cache")
             return
         } else {
             path.getData(maxSize: 27 * 1024 * 1024) { returnedImageData, error in
                 if let data = returnedImageData, let image = UIImage(data: data) {
                     imageCache.setObject(image, forKey: path)
                 handler(image)
+                    print("downloading image from Firebase")
                     return
                 } else {
                     handler(nil)

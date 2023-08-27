@@ -12,7 +12,7 @@ struct PostModel: Identifiable, Hashable {
     var postID: String
     var userID: String
     var userName: String
-    var caption: String
+    var caption: String?
     var dateCreated: Date
     var likeCount: Int
     var likedByUser: Bool
