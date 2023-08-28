@@ -26,7 +26,8 @@ struct DatabasePostField{
     static let userID =   "user_id"
     static let displayName = "display_name"
     static let dateCreated =  "date_created"
-    
+    static let likeCount = "like_count"
+    static let likedBy = "liked_by"
 }
 
 
@@ -35,5 +36,13 @@ struct CurrentUserDefaults {
     static let displayName = "display_name"
     static let userID =   "user_id"
     static let bio =  "bio"
+    
+}
+
+struct DatabaseReportField {
+    
+    static let content = "content"
+    static let postID = "post_id"
+    static let dateCreated =  "date_created"
     
 }

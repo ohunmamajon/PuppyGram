@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC00ADF22A9C7DF900D21C67 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00ADF12A9C7DF900D21C67 /* LazyView.swift */; };
 		CC2A74AC2A7DBF6B00F0A187 /* ImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2A74AB2A7DBF6B00F0A187 /* ImageGridView.swift */; };
 		CC2A74AE2A7DC7EC00F0A187 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2A74AD2A7DC7EC00F0A187 /* UploadView.swift */; };
 		CC2A74B02A7DD74500F0A187 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2A74AF2A7DD74500F0A187 /* ImagePicker.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CC00ADF12A9C7DF900D21C67 /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
 		CC2A74AB2A7DBF6B00F0A187 /* ImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridView.swift; sourceTree = "<group>"; };
 		CC2A74AD2A7DC7EC00F0A187 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		CC2A74AF2A7DD74500F0A187 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				CCB31AFC2A7B3DCA005080A0 /* Extensions.swift */,
 				CC2A74AF2A7DD74500F0A187 /* ImagePicker.swift */,
 				CC2B79DC2A9863D600E7AF7C /* Enums & Structs.swift */,
+				CC00ADF12A9C7DF900D21C67 /* LazyView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				CC33D2D22A8075B900826437 /* ProfileView.swift in Sources */,
 				CCB31B0D2A7C834B005080A0 /* CommentsView.swift in Sources */,
 				CC2A74AE2A7DC7EC00F0A187 /* UploadView.swift in Sources */,
+				CC00ADF22A9C7DF900D21C67 /* LazyView.swift in Sources */,
 				CCE65AA02A87163E00448AD0 /* OnboardingView.swift in Sources */,
 				CC2A74B02A7DD74500F0A187 /* ImagePicker.swift in Sources */,
 				CCB31B152A7C90C5005080A0 /* CarouselView.swift in Sources */,

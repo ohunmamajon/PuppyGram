@@ -9,13 +9,21 @@ import SwiftUI
 
 struct PostView: View {
     
+   
+    
+   
     @State var post: PostModel
-    @State var anmateLike: Bool = false
+    @State var animateLike: Bool = false
     @State var addHeartAnimationView : Bool = false
     @State var showActionSheet: Bool = false
     @State var actionSheetType: PostActionSheetOption = .general
     @State var profileImage: UIImage = UIImage(named: "logo.loading")!
     @State var postImage: UIImage = UIImage(named: "logo.loading")!
+    @State var alertTitle: String = ""
+    @State var alertMessage: String = ""
+    @State var showReportAlert: Bool = false
+    
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
     
     enum PostActionSheetOption {
         case general
@@ -23,6 +31,9 @@ struct PostView: View {
     }
     
     var showHeaderAndFooter: Bool
+    
+    var width: CGFloat?
+    var height: CGFloat?
     
     var body: some View {
         VStack{
@@ -32,7 +43,9 @@ struct PostView: View {
                 HStack{
                     
                     NavigationLink {
-                        ProfileView(profileDisplayName: post.userName, profileID: post.userID, isMyProfile: false, posts: PostArrayObject(userID: post.userID))
+                        LazyView {
+                            ProfileView(profileDisplayName: post.userName, profileID: post.userID, isMyProfile: false, posts: PostArrayObject(userID: post.userID))
+                        }
                     } label: {
                         Image(uiImage: profileImage)
                             .resizable()
@@ -67,9 +80,13 @@ struct PostView: View {
                 Image(uiImage: postImage)
                     .resizable()
                     .scaledToFit()
+                    .onTapGesture(count: 2 , perform: {
+                        if !post.likedByUser {
+                            likePost()
+                        }
+                    })
                 
-                
-                if addHeartAnimationView { LikeAnimationView(animate: $anmateLike)
+                if addHeartAnimationView { LikeAnimationView(animate: $animateLike)
                     
                 }
             }
@@ -123,6 +140,9 @@ struct PostView: View {
         .onAppear{
             getImages()
         }
+        .alert(isPresented: $showReportAlert) {
+            return Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        }
         }
     
     //MARK: Functions
@@ -144,15 +164,29 @@ struct PostView: View {
     func likePost(){
         let upDatedPost = PostModel(postID: post.postID, userID: post.userID, userName: post.userID, caption: post.caption, dateCreated: post.dateCreated, likeCount: post.likeCount + 1, likedByUser: true)
         self.post = upDatedPost
-        anmateLike = true
+        animateLike = true
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-            anmateLike = false
+            animateLike = false
         }
+        
+        guard let userID = currentUserID else { print("cannot find find user id while liking the post")
+            return
+        }
+        
+        DataService.instance.likePost(postID: post.postID, currentUserID: userID)
+        
   }
     func unlikePost(){
         let upDatedPost = PostModel(postID: post.postID, userID: post.userID, userName: post.userID, caption: post.caption, dateCreated: post.dateCreated, likeCount: post.likeCount - 1, likedByUser: false)
         self.post = upDatedPost
+        
+        guard let userID = currentUserID else { print("cannot find find user id while unliking the post")
+            return
+        }
+        
+        DataService.instance.unlikePost(postID: post.postID, currentUserID: userID)
+        
     }
     
     func getActionSheet() -> ActionSheet {
@@ -189,7 +223,17 @@ struct PostView: View {
     }
     
     func reportPost(reason: String) {
-        
+        DataService.instance.uploadReport(reason: reason, postID: post.postID) { success in
+            if success {
+                self.alertTitle = "Reported!"
+                self.alertMessage = "Thanks for reporting! We will review it shortly and take the appropriate action"
+                self.showReportAlert.toggle()
+            } else {
+                self.alertTitle = "Error"
+                self.alertMessage = "There was an error reporting! Pleaser restart the app and try again!"
+                self.showReportAlert.toggle()
+            }
+        }
     }
     
     func sharePost() {

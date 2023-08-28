@@ -16,6 +16,9 @@ class DataService {
     
     private var refPost = db.collection("posts")
     
+    private var refReports = db.collection("reports")
+    
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
     
     
     //MARK: CREATE FUNCTIONS
@@ -52,6 +55,25 @@ class DataService {
         }
         
     }
+    
+    func uploadReport(reason: String, postID: String, handler: @escaping(_ success: Bool)-> ()){
+        
+        let data: [String: Any] = [
+            DatabaseReportField.content : reason,
+            DatabaseReportField.postID : postID,
+            DatabaseReportField.dateCreated : FieldValue.serverTimestamp()
+        ]
+        
+        refReports.addDocument(data: data) { error in
+            if let err = error {
+                print("Error uploading report:  \(err)")
+                handler(false)
+                return
+            }
+        }
+        handler(true)
+        return
+    }
         
     //MARK: GET FUNCTIONS
     
@@ -83,7 +105,14 @@ class DataService {
                     let caption = document.get(DatabasePostField.caption) as? String
                     let date = timestamp.dateValue()
                     let postID = document.documentID
-                    let newPost = PostModel(postID: postID, userID: userID, userName: displayName, caption: caption, dateCreated: date, likeCount: 0, likedByUser: false)
+                    let likeCount = document.get(DatabasePostField.likeCount) as? Double ?? 0
+                    
+                    var likedByUser: Bool = false
+                    if let userIDArray = document.get(DatabasePostField.likedBy) as? [String], let user = currentUserID {
+                       likedByUser = userIDArray.contains(userID)
+                    }
+                    
+                    let newPost = PostModel(postID: postID, userID: userID, userName: displayName, caption: caption, dateCreated: date, likeCount: Int(likeCount), likedByUser: likedByUser)
                     postArray.append(newPost)
                 }
             }
@@ -92,6 +121,30 @@ class DataService {
          print("No post document in snapshot for the user")
             return postArray
         }
+    }
+    
+    
+    //MARK: UPDATE FUNCTIONS
+    
+    func likePost(postID: String, currentUserID: String ) {
+        let increment: Double = 1.0
+        let data: [String : Any] = [
+            DatabasePostField.likeCount : FieldValue.increment(increment),
+            DatabasePostField.likedBy: FieldValue.arrayUnion([currentUserID])
+            
+        ]
+        
+        refPost.document(postID).updateData(data)
+    }
+    
+    func unlikePost(postID: String, currentUserID: String ) {
+        let increment: Double = -1.0
+        let data: [String : Any] = [
+            DatabasePostField.likeCount : FieldValue.increment(increment),
+            DatabasePostField.likedBy: FieldValue.arrayRemove([currentUserID])
+        ]
+        
+        refPost.document(postID).updateData(data)
     }
     
 }
