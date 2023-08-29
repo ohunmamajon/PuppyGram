@@ -10,7 +10,7 @@ import SwiftUI
 import FirebaseFirestore
 
 class DataService {
-
+    
     //MARK: PROPERTIES
     static let instance = DataService()
     
@@ -51,7 +51,7 @@ class DataService {
                 handler(false)
                 return
             }
-        
+            
         }
         
     }
@@ -73,6 +73,31 @@ class DataService {
         }
         handler(true)
         return
+    }
+    
+    func uploadComment(postID: String, content: String, displayName: String, userID: String, handler: @escaping (_ success: Bool, _ commentID: String?) -> () ) {
+        let document = refPost.document(postID).collection(DatabasePostField.comments).document()
+        
+        let commentID = document.documentID
+        
+        let data: [String: Any] = [
+            DatabaseCommentField.commentID: commentID,
+            DatabaseCommentField.userID: userID,
+            DatabaseCommentField.displayName: displayName,
+            DatabaseCommentField.content: content,
+            DatabaseCommentField.dateCreated: FieldValue.serverTimestamp()
+        ]
+        
+        document.setData(data) { error in
+            if let err = error {
+                print("error uploading comment")
+                handler(false, nil)
+                return
+            } else {
+                handler(true, commentID)
+                return
+            }
+        }
     }
         
     //MARK: GET FUNCTIONS
@@ -123,6 +148,34 @@ class DataService {
         }
     }
     
+    func downloadComments(postID: String, handler: @escaping (_ comments: [CommentModel]) -> ()) {
+        refPost.document(postID).collection(DatabasePostField.comments).order(by: DatabaseCommentField.dateCreated, descending: false).getDocuments { querySnapshot, error in
+            handler(self.getCommentsFromSnapshot(querySnapshot: querySnapshot))
+        }
+    }
+    
+    func getCommentsFromSnapshot(querySnapshot: QuerySnapshot?) -> [CommentModel] {
+        var commentArray = [CommentModel]()
+        if let snapShot = querySnapshot, snapShot.documents.count > 0 {
+            for document in snapShot.documents {
+                if
+                    let userID = document.get(DatabaseCommentField.userID) as? String,
+                    let displayName = document.get(DatabaseCommentField.displayName) as? String,
+                    let content = document.get(DatabaseCommentField.content) as? String,
+                    let timeStamp = document.get(DatabaseCommentField.dateCreated) as? Timestamp {
+                    
+                    let commentID = document.documentID
+                    let date = timeStamp.dateValue()
+                    let newComment = CommentModel(commentID: commentID, userID: userID, userName: displayName, content: content, dateCreated: date)
+                    commentArray.append(newComment)
+                }
+            }
+            return commentArray
+        } else {
+            print("no comments for this post")
+            return commentArray
+        }
+    }
     
     //MARK: UPDATE FUNCTIONS
     

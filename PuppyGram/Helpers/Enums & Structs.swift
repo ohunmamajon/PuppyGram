@@ -28,6 +28,17 @@ struct DatabasePostField{
     static let dateCreated =  "date_created"
     static let likeCount = "like_count"
     static let likedBy = "liked_by"
+    static let comments = "comments"
+}
+
+struct DatabaseCommentField {
+    
+    static let commentID = "comment_id"
+    static let displayName = "display_name"
+    static let userID =   "user_id"
+    static let content = "content"
+    static let dateCreated =  "date_created"
+    
 }
 
 

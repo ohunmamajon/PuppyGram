@@ -112,7 +112,7 @@ struct PostView: View {
                     // MARK: Comment Icon
                     
                     NavigationLink {
-                        CommentsView()
+                        CommentsView(post: post)
                     } label: {
                         Image(systemName: "bubble.middle.bottom")
                             .font(.title3)
