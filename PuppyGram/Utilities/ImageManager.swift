@@ -20,14 +20,20 @@ class ImageManager{
     
     func uploadProfileImage(userID: String, image: UIImage){
         let path = getProfileImagePath(userID: userID)
-        
-        uploadImage(path: path, image: image) { _ in }
+    
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.uploadImage(path: path, image: image) { _ in }
+        }
     }
     
     func uploadPostImage(postID: String, image: UIImage, handler: @escaping(_ success: Bool) -> ()) {
         let path = getPostImagePath(postID: postID)
-        uploadImage(path: path, image: image) { success in
-            handler(success)
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.uploadImage(path: path, image: image) { success in
+                DispatchQueue.main.async {
+                    handler(success)
+                }
+           }
         }
     }
     
@@ -46,16 +52,24 @@ class ImageManager{
     func downloadProfileImage(userID: String, handler: @escaping(_ image: UIImage?) -> ()){
         let path = getProfileImagePath(userID: userID)
         
-        downloadImage(path: path) { returnedImage in
-            handler(returnedImage)
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.downloadImage(path: path) { returnedImage in
+                DispatchQueue.main.async {
+                    handler(returnedImage)
+                }
+            }
         }
-        
     }
     
     func downloadPostImage(postID: String, handler: @escaping(_ image: UIImage?) -> ()) {
         let path = getPostImagePath(postID: postID)
-        downloadImage(path: path) { returnedImage in
-            handler(returnedImage)
+        
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.downloadImage(path: path) { returnedImage in
+                DispatchQueue.main.async {
+                    handler(returnedImage)
+                }
+            }
         }
     }
     

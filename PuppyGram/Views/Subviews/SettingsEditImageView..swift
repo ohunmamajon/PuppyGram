@@ -34,7 +34,7 @@ struct SettingsEditImageView: View {
             
         
            
-                PhotosPicker("Import", selection: $photoItem,
+            PhotosPicker("Import".uppercased(), selection: $photoItem,
                              matching: .images)
                              .frame(maxWidth: .infinity)
                              .frame(height: 60)

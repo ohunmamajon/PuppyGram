@@ -36,10 +36,8 @@ struct OnboardingView2: View {
                 .textInputAutocapitalization(.sentences)
                 .padding(.horizontal)
         
-            PhotosPicker(selection: $photoItem,
-                         matching: .images) {
-                Label("Finish: Add profile picture", systemImage: "photo")
-                   }
+            PhotosPicker("Add your profile picture", selection: $photoItem,
+                         matching: .images)
                          .font(.headline)
                          .fontWeight(.bold)
                          .padding()
@@ -51,12 +49,15 @@ struct OnboardingView2: View {
                          .tint(Color.MyTheme.purpleColor)
                          .opacity(displayName  != "" ? 1.0 : 0.0)
                          .animation(.easeInOut(duration: 1.0), value: UUID())
-               .onChange(of: photoItem) { newItem in
+               .onChange(of: photoItem) { _ in
                    Task {
-                       if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                           selectedImage = UIImage(data: data)!
-                           createProfile()
+                       if let data = try? await photoItem?.loadTransferable(type: Data.self) {
+                           if let uiImage = UIImage(data: data) {
+                               selectedImage = uiImage
+                               return
+                           }
                        }
+                       print("failed to select image")
                    }
                }
 

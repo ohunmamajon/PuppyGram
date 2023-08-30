@@ -34,23 +34,22 @@ struct UploadView: View {
                 .background(Color.MyTheme.purpleColor)
                 
                
-             PhotosPicker(selection: $photoItem,
-                          matching: .images) {
-                 
-                 Label("Select photo".uppercased(), systemImage: "photo")
-                    }
-                
+                PhotosPicker("Select photo".uppercased(), selection: $photoItem,
+                             matching: .images)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .tint(Color.MyTheme.purpleColor)
                 .background(Color.MyTheme.yellowColor)
-                .onChange(of: photoItem) { newItem in
+                .onChange(of: photoItem) { _ in
                     Task {
-                        if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                            imageSelected = UIImage(data: data)!
-                            segueToPostImageView()
+                        if let data = try? await photoItem?.loadTransferable(type: Data.self) {
+                            if let uiImage = UIImage(data: data) {
+                                imageSelected = uiImage
+                                return
+                            }
                         }
+                        print("failed to select image")
                     }
                 }
             }
