@@ -137,5 +137,37 @@ class AuthService {
             }
         }
     }
+   
+    func updateUserDisplayName(userID: String, displayName: String, handler: @escaping(_ success: Bool) -> ()) {
+        
+        let dataField: [String: Any] = [
+            DatabaseUserField.displayName: displayName
+        ]
+        ref.document(userID).updateData(dataField) { error in
+            if let err = error {
+                print("Error updating user display Name")
+                handler(false)
+                return
+            } else {
+                handler(true)
+            }
+        }
+    }
+   
+    func updateUserBio(userID: String, bio: String, handler: @escaping(_ success: Bool) -> ()) {
+        
+        let dataField: [String: Any] = [
+            DatabaseUserField.bio: bio
+        ]
+        ref.document(userID).updateData(dataField) { error in
+            if let err = error {
+                print("Error updating user display Name")
+                handler(false)
+                return
+            } else {
+                handler(true)
+            }
+        }
+    }
     
 }

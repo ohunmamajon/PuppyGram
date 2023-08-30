@@ -57,3 +57,8 @@ struct DatabaseReportField {
     static let dateCreated =  "date_created"
     
 }
+
+enum SettingsEditTextOption {
+    case displayName
+    case bio
+}

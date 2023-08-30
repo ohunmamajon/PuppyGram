@@ -9,6 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @Binding var userDisplayName: String
+    @Binding var userBio: String
+    @Binding var userProfilePicture: UIImage
     @Environment(\.dismiss) var dismiss
     @State var signOutError: Bool = false
     
@@ -37,20 +40,20 @@ struct SettingsView: View {
                 GroupBox {
                     
                     NavigationLink {
-                       SettingsEditTextView(submissionText: "Current Display Name", title: "Display Name", description: "This Text can be edited", placeholder: "Your display name here...")
+                        SettingsEditTextView(profileText: $userDisplayName, submissionText: userDisplayName, title: "Display Name", description: "This Text can be edited", placeholder: "Your display name here...", settingsEditTextOption: .displayName)
                     } label: {
                         SettingsRowView(leftIcon: "pencil", text: "Display Name", color: Color.MyTheme.purpleColor)
                     }
 
                     NavigationLink {
-                        SettingsEditTextView(submissionText: "Current bio here", title: "Profile Bio", description: "Write a catchy bio!", placeholder: "Your bio here...")
+                        SettingsEditTextView(profileText: $userBio, submissionText: userBio, title: "Profile Bio", description: "Write a catchy bio!", placeholder: "Your bio here...", settingsEditTextOption: .bio)
                     } label: {
                         SettingsRowView(leftIcon: "text.quote", text: "Bio", color: Color.MyTheme.purpleColor)
                     }
 
                     
                     NavigationLink {
-                        SettingsEditImageView(title: "Profile Picture", description: "Your profile will br shown on your profile")
+                        SettingsEditImageView(profileImage: $userProfilePicture, title: "Profile Picture", description: "Your profile will br shown on your profile", selectedImage: userProfilePicture)
                     } label: {
                         SettingsRowView(leftIcon: "photo", text: "Profile Picture", color: Color.MyTheme.purpleColor)
                     }
@@ -143,7 +146,12 @@ struct SettingsView: View {
 }
 
 struct SettingsView_Previews: PreviewProvider {
+    
+    @State static var bio: String = "ok"
+    @State static var displayName: String = "john"
+    @State static var image = UIImage(named: "logo.loading")!
+    
     static var previews: some View {
-        SettingsView()
+        SettingsView(userDisplayName: $displayName, userBio: $bio, userProfilePicture: $image)
     }
 }

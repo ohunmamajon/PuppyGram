@@ -83,7 +83,7 @@ struct CommentsView: View {
         }
     }
     
-    func textIsAppropriate() -> Bool {
+   private func textIsAppropriate() -> Bool {
         let badWordArray: [String] = ["shit", "ass"]
         let words = submissionText.components(separatedBy: " ")
         

@@ -200,4 +200,22 @@ class DataService {
         refPost.document(postID).updateData(data)
     }
     
+    
+    func updateDisplayNameOnPosts(userID: String, displayName: String) {
+        downloadPostForUser(userID: userID) { returnedPosts in
+            for post in returnedPosts {
+                self.updatePostDisplayName(postID: post.postID, displayName: displayName)
+            }
+        }
+    }
+    
+    private func updatePostDisplayName(postID: String, displayName: String) {
+        
+        let data: [String: Any] = [
+            DatabasePostField.displayName: displayName
+        ]
+        
+        refPost.document(postID).updateData(data)
+    }
+    
 }
