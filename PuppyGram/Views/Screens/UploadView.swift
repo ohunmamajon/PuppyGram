@@ -10,14 +10,14 @@ import UIKit
 import PhotosUI
 
 struct UploadView: View {
-    
+    @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
     @State private var showImagePicker: Bool = false
     @State private var showPhotosUIPicker: Bool = false
     @State private var photoItem: PhotosPickerItem?
     @State private var imageSelected = UIImage()
     @State private var showPostImageView: Bool = false
     @Environment(\.colorScheme) var colorScheme
-    
+
     var body: some View {
         ZStack {
             VStack(spacing: 0){
@@ -32,7 +32,7 @@ struct UploadView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .background(Color.MyTheme.purpleColor)
-                
+                .disabled(currentUserID == nil)
                
                 PhotosPicker("Select photo".uppercased(), selection: $photoItem,
                              matching: .images)
@@ -41,11 +41,13 @@ struct UploadView: View {
                 .fontWeight(.bold)
                 .tint(Color.MyTheme.purpleColor)
                 .background(Color.MyTheme.yellowColor)
+                .disabled(currentUserID == nil)
                 .onChange(of: photoItem) { _ in
                     Task {
                         if let data = try? await photoItem?.loadTransferable(type: Data.self) {
                             if let uiImage = UIImage(data: data) {
                                 imageSelected = uiImage
+                                segueToPostImageView()
                                 return
                             }
                         }

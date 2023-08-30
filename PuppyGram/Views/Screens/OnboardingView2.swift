@@ -54,6 +54,7 @@ struct OnboardingView2: View {
                        if let data = try? await photoItem?.loadTransferable(type: Data.self) {
                            if let uiImage = UIImage(data: data) {
                                selectedImage = uiImage
+                               createProfile()
                                return
                            }
                        }

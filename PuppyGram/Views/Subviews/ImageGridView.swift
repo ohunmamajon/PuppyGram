@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+let width = UIScreen.main.bounds.width
+
 struct ImageGridView: View {
     
     @ObservedObject var posts: PostArrayObject

@@ -62,3 +62,8 @@ enum SettingsEditTextOption {
     case displayName
     case bio
 }
+
+enum PostActionSheetOption {
+    case general
+    case reporting
+}

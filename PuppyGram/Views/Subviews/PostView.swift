@@ -25,10 +25,7 @@ struct PostView: View {
     
     @AppStorage(CurrentUserDefaults.userID) var currentUserID: String?
     
-    enum PostActionSheetOption {
-        case general
-        case reporting
-    }
+    
     
     var showHeaderAndFooter: Bool
     
@@ -37,6 +34,8 @@ struct PostView: View {
     
     var body: some View {
         VStack{
+            
+            var captionName = post.userName.split(separator: " ").joined()
             
             // MARK: Header
             if showHeaderAndFooter{
@@ -79,7 +78,8 @@ struct PostView: View {
             ZStack{
                 Image(uiImage: postImage)
                     .resizable()
-                    .scaledToFit()
+                    .aspectRatio(1, contentMode: .fit)
+                    
                     .onTapGesture(count: 2 , perform: {
                         if !post.likedByUser {
                             likePost()
@@ -133,10 +133,16 @@ struct PostView: View {
                 .padding(.all, 6)
              
                 HStack {
-                    Text(post.caption ?? "")
-                    Spacer(minLength: 0)
+                    if let caption = post.caption, caption.count > 1{
+                        Text("**\(captionName.lowercased())** \(caption)")
+                        Spacer(minLength: 0)
+                    } else {
+                        Text("")
+                    }
                 }
-                .padding(.all, 6)
+                .padding(.all, 5)
+                .padding(.leading, 6)
+                .padding(.bottom, 6)
             }
         }
         .onAppear{

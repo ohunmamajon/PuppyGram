@@ -11,7 +11,6 @@ struct FeedView: View {
     
     @ObservedObject var posts: PostArrayObject
     var title: String
-    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVStack

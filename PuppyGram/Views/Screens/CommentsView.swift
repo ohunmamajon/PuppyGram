@@ -73,11 +73,6 @@ struct CommentsView: View {
         
         guard self.commentsArray.isEmpty else { return }
         
-        if let caption = post.caption, caption.count > 1 {
-            let captionComment = CommentModel(commentID: "", userID: post.userID, userName: post.userName, content: caption, dateCreated: post.dateCreated)
-            self.commentsArray.append(captionComment)
-        }
-        
         DataService.instance.downloadComments(postID: post.postID) { returnedComments in
             self.commentsArray.append(contentsOf: returnedComments)
         }
