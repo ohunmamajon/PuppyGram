@@ -8,6 +8,9 @@
 import SwiftUI
 import FirebaseCore
 import GoogleSignIn
+import FirebaseFirestore
+import FirebaseAuth
+      
 
 @main
 struct PuppyGramApp: App {

@@ -83,6 +83,7 @@ struct PostView: View {
                     .onTapGesture(count: 2 , perform: {
                         if !post.likedByUser {
                             likePost()
+                            AnalyticsService.instance.likePostDoubleTapped()
                         }
                     })
                 
@@ -100,6 +101,7 @@ struct PostView: View {
                             unlikePost()
                         } else {
                             likePost()
+                            AnalyticsService.instance.likePostHeartPressed()
                         }
                         
                     } label: {

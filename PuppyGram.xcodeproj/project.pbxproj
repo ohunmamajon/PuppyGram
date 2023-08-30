@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CC00ADF22A9C7DF900D21C67 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00ADF12A9C7DF900D21C67 /* LazyView.swift */; };
+		CC242DCA2A9F0A6F003C046D /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC242DC92A9F0A6F003C046D /* AnalyticsService.swift */; };
 		CC2A74AC2A7DBF6B00F0A187 /* ImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2A74AB2A7DBF6B00F0A187 /* ImageGridView.swift */; };
 		CC2A74AE2A7DC7EC00F0A187 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2A74AD2A7DC7EC00F0A187 /* UploadView.swift */; };
 		CC2A74B02A7DD74500F0A187 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2A74AF2A7DD74500F0A187 /* ImagePicker.swift */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		CC00ADF12A9C7DF900D21C67 /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
+		CC242DC92A9F0A6F003C046D /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		CC2A74AB2A7DBF6B00F0A187 /* ImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridView.swift; sourceTree = "<group>"; };
 		CC2A74AD2A7DC7EC00F0A187 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		CC2A74AF2A7DD74500F0A187 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			children = (
 				CC2B79DA2A98530E00E7AF7C /* AuthService.swift */,
 				CC2B79E12A999F4A00E7AF7C /* DataService.swift */,
+				CC242DC92A9F0A6F003C046D /* AnalyticsService.swift */,
 			);
 			name = Firebase;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				CC2A74AC2A7DBF6B00F0A187 /* ImageGridView.swift in Sources */,
 				CCB31B032A7B42BA005080A0 /* PostView.swift in Sources */,
 				CCB31B132A7C8FFE005080A0 /* BrowseView.swift in Sources */,
+				CC242DCA2A9F0A6F003C046D /* AnalyticsService.swift in Sources */,
 				CC2B79DB2A98530E00E7AF7C /* AuthService.swift in Sources */,
 				CCB31B112A7C8803005080A0 /* CommentModel.swift in Sources */,
 				CC33D2D42A8077E900826437 /* ProfileHeaderView.swift in Sources */,
